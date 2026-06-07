@@ -84,6 +84,90 @@ npm run build:user-dist
 
 > `build:user-dist` 会输出到 `../nezha/dashboard/user-dist`，nezha 后端通过 `go:embed` 在 `dashboard` 目录下嵌入静态资源后即可作为默认用户前端。
 
+## Docker 部署
+
+仓库已经配置了 GitHub Actions（`.github/workflows/web-docker.yml`），每次推送到默认分支或打 `v*` tag 时会自动构建 **多架构（linux/amd64 + linux/arm64）** 镜像并推送到 GitHub Container Registry：
+
+```
+ghcr.io/karllao/nezha-pixel-web:latest        # 默认分支最新构建
+ghcr.io/karllao/nezha-pixel-web:v1.2.3        # 对应的 tag
+ghcr.io/karllao/nezha-pixel-web:sha-<short>   # 每次 commit 的短 sha
+```
+
+> 把 `<OWNER>/<REPO>` 替换成你 fork 后的 GitHub 仓库（例如 `your-name/nezha-pixel`）。Fork 后默认分支推送一次或手动触发 `Build & Push Web Image` workflow 即可生成镜像；如果包默认是 private，进入 GitHub Packages 设置改成 public 才能匿名 `docker pull`。
+
+镜像本身只是一个内置 SPA history 兜底的 Nginx，**不带任何后端**，需要前置反代把 `/api/v1` 与 WebSocket 转给原版 nezha 后端。
+
+### 直接 `docker run`
+
+```bash
+docker run -d \
+  --name nezha-pixel-web \
+  --restart=unless-stopped \
+  -p 127.0.0.1:8081:80 \
+  ghcr.io/karllao/nezha-pixel-web:latest
+```
+
+### docker-compose 示例
+
+```yaml
+services:
+  nezha-pixel-web:
+    image: ghcr.io/karllao/nezha-pixel-web:latest
+    container_name: nezha-pixel-web
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:80"
+```
+
+### Caddy 反代示例
+
+下面这段 `Caddyfile` 实现：
+
+- `/dashboard` 与 `/dashboard/*` → **原版 nezha 后台**（保留官方管理界面）
+- `/api/v1/*`（含 `/api/v1/ws/server` WebSocket）→ **原版 nezha 后端**（像素前台从这里拉数据）
+- 其它任意路径 → **像素前台容器**（首页、详情页、服务页、404 等 SPA 路由）
+
+假设原版 nezha 后端跑在宿主机 `127.0.0.1:8008`，像素前台容器映射在 `127.0.0.1:8081`：
+
+```caddy
+status.example.com {
+    encode zstd gzip
+
+    # 1) 原版 nezha 后台（管理面板）
+    @nezha_dashboard path /dashboard /dashboard/*
+    handle @nezha_dashboard {
+        reverse_proxy 127.0.0.1:8008
+    }
+
+    # 2) 原版 nezha API + WebSocket（Caddy 会自动识别 Upgrade 头升级 WS）
+    @nezha_api path /api/v1 /api/v1/*
+    handle @nezha_api {
+        reverse_proxy 127.0.0.1:8008
+    }
+
+    # 3) 其它请求 → 像素前台
+    handle {
+        reverse_proxy 127.0.0.1:8081
+    }
+}
+```
+
+如果 nezha 后端和 Caddy 都在 docker compose 同一网络里，把 `127.0.0.1:8008` / `127.0.0.1:8081` 换成对应的 service 名即可，例如 `nezha:8008` / `nezha-pixel-web:80`。
+
+访问效果：
+
+| 入口 | 实际后端 |
+| --- | --- |
+| `https://status.example.com/` | 像素前台首页 |
+| `https://status.example.com/server/1` | 像素前台单机详情（SPA 路由由容器 nginx 兜底） |
+| `https://status.example.com/services` | 像素前台服务监控页 |
+| `https://status.example.com/api/v1/...` | 原版 nezha REST API |
+| `wss://status.example.com/api/v1/ws/server` | 原版 nezha WebSocket 实时推送 |
+| `https://status.example.com/dashboard` | 原版 nezha 管理后台 |
+
+> 如果你只想暴露像素前台、隐藏管理后台，把上面第 1 段 `@nezha_dashboard` 整段删掉即可——`/dashboard` 路径会被 SPA 兜底走到 404 页面。
+
 ## API 来源
 
 所有接口与字段定义参考：
