@@ -179,14 +179,14 @@ function getNum(v: number | Record<string, number>, key: string): number {
 
 <style scoped>
 .page-head h1 {
-  font-size: 14px;
+  font-size: 16px;
 }
 .loading,
 .empty {
   padding: 36px;
   text-align: center;
   font-family: var(--pixel-font-en);
-  font-size: 11px;
+  font-size: 14px;
 }
 .blink {
   animation: blink 1s steps(2) infinite;
@@ -209,8 +209,8 @@ function getNum(v: number | Record<string, number>, key: string): number {
 }
 .svc-head .name {
   font-family: var(--pixel-font-en);
-  font-size: 11px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
 }
 .svc-meta {
   display: grid;
@@ -223,13 +223,13 @@ function getNum(v: number | Record<string, number>, key: string): number {
 }
 .svc-meta .k {
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
-  text-transform: uppercase;
+  
 }
 .svc-meta .v {
   font-family: var(--pixel-font-text);
-  font-size: 15px;
+  font-size: 16px;
 }
 .timeline {
   display: flex;
@@ -259,8 +259,8 @@ function getNum(v: number | Record<string, number>, key: string): number {
 }
 .cycle-head .name {
   font-family: var(--pixel-font-en);
-  font-size: 11px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
 }
 .cycle-row {
   display: flex;
@@ -273,11 +273,11 @@ function getNum(v: number | Record<string, number>, key: string): number {
   display: flex;
   justify-content: space-between;
   font-family: var(--pixel-font-text);
-  font-size: 14px;
+  font-size: 16px;
 }
 .cycle-meta .srv-name {
   font-family: var(--pixel-font-en);
-  font-size: 10px;
+  font-size: 14px;
 }
 .cycle-bar {
   height: 10px;
@@ -294,6 +294,6 @@ function getNum(v: number | Record<string, number>, key: string): number {
   display: flex;
   gap: 6px;
   font-family: var(--pixel-font-text);
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

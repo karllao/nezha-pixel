@@ -95,8 +95,8 @@ const last = computed(() =>
   display: flex;
   justify-content: space-between;
   font-family: var(--pixel-font-en);
-  font-size: 10px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
 }
 .label {
   color: var(--pixel-text-dim);

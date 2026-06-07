@@ -29,12 +29,13 @@
   --pixel-grid: rgba(125, 249, 255, 0.05);
   /* 强调色按钮上的对比文字：暗模式下用深色，便于"色块按钮"高亮 */
   --pixel-on-accent: #0f0f1a;
-  /* 标题/字号小的英文继续用 Press Start 2P；中文走 Cubic 11 */
-  --pixel-font-en: "Press Start 2P", "Cubic 11", monospace;
-  /* 正文同时兼顾中英文 — VT323 渲染英文很像素，Cubic 11 渲染中日韩 */
-  --pixel-font-text: "VT323", "Cubic 11", "Press Start 2P", monospace;
-  /* 纯像素中文字体（标签 / 强调）—— 中文像素效果最佳 */
-  --pixel-font-cn: "Cubic 11", "VT323", monospace;
+  /* 统一像素字体：Cubic 11 自带 CJK + 西文像素 glyph，
+   * 中英文同一字模，粗细、行高、字号一致，切换语言不会突兀。
+   * Press Start 2P 只作为 LOGO / 标牌的装饰风格点缀。 */
+  --pixel-font-text: "Cubic 11", "Press Start 2P", monospace;
+  --pixel-font-en: "Cubic 11", "Press Start 2P", monospace;
+  --pixel-font-cn: "Cubic 11", monospace;
+  --pixel-font-deco: "Press Start 2P", "Cubic 11", monospace;
 }
 
 [data-theme="light"] {
@@ -73,34 +74,23 @@ body {
   background: var(--pixel-bg);
   color: var(--pixel-text);
   font-family: var(--pixel-font-text);
-  font-size: 18px;
-  line-height: 1.4;
+  /* Cubic 11 是 11×12 位图字体；放大到 16-22px 才有"像素颗粒"的方块感
+   * 22px = 2× 原生整数倍，每个字模像素 = 2×2 屏幕像素，颗粒最清晰 */
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  font-weight: normal;
   image-rendering: pixelated;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
-  /* 关闭抗锯齿，让中文像素字体 Cubic 11 显示更锐利 */
   -webkit-text-size-adjust: 100%;
   text-rendering: optimizeSpeed;
+  /* 禁止伪粗体 / 伪斜体，避免插值模糊 —— Cubic 11 无 bold variant */
   font-synthesis: none;
   background-image:
     linear-gradient(var(--pixel-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--pixel-grid) 1px, transparent 1px);
   background-size: 16px 16px;
-}
-
-/* 中文/CJK 元素：使用 Cubic 11 并按 11px 整数倍渲染避免插值模糊 */
-:lang(zh),
-:lang(zh-CN),
-:lang(ja),
-:lang(ko) {
-  font-family: var(--pixel-font-cn);
-}
-
-/* 中文模式下统一把所有 --pixel-font-en 引用改成 Cubic 11，
- * 这样使用了 --pixel-font-en 的标签 / 标题 / 按钮 也都是像素中文。 */
-html[lang^="zh"] {
-  --pixel-font-en: "Cubic 11", "Press Start 2P", monospace;
-  --pixel-font-text: "Cubic 11", "VT323", monospace;
 }
 
 a {
@@ -122,10 +112,9 @@ a:hover {
 }
 
 .pixel-title {
-  font-family: var(--pixel-font-en);
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-family: var(--pixel-font-text);
+  font-size: 18px;
+  letter-spacing: 0;
 }
 
 /* Scrollbar */
@@ -208,37 +197,21 @@ a:hover {
   }
 }
 
-/* Tiny chips for OS / arch / etc */
+/* Tiny chips for OS / arch / etc — 14px 给足像素颗粒感且不过大 */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-family: var(--pixel-font-en);
-  font-size: 9px;
-  padding: 4px 6px;
+  font-family: var(--pixel-font-text);
+  font-size: 14px;
+  line-height: 1;
+  padding: 6px 9px;
   background: var(--pixel-bg-alt);
   border: 2px solid var(--pixel-border);
   color: var(--pixel-text);
-  text-transform: uppercase;
-}
-
-/* 中文 chip 字号略放大，Cubic 11 在 11/22px 下最锐利 */
-html[lang^="zh"] .chip {
-  font-size: 11px;
+  /* 不强制大写 / 不加字距 —— 让中英文以原始字模渲染 */
   text-transform: none;
   letter-spacing: 0;
-}
-html[lang^="zh"] h1 {
-  font-size: 20px;
-}
-html[lang^="zh"] h2 {
-  font-size: 16px;
-}
-html[lang^="zh"] h3 {
-  font-size: 14px;
-}
-html[lang^="zh"] h4 {
-  font-size: 12px;
 }
 
 .chip.ok {
@@ -266,41 +239,28 @@ html[lang^="zh"] h4 {
   background: color-mix(in srgb, currentColor 12%, white);
 }
 
-/* Headings */
+/* Headings —— 大字号像素颗粒感最足，22 / 32 是 11 的整数倍 */
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--pixel-font-en);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-family: var(--pixel-font-text);
+  font-weight: normal;
+  letter-spacing: 0;
   margin: 0;
+  line-height: 1.2;
 }
-
-/* 中文模式下标题改用 Cubic 11，否则会因 Press Start 2P 无中文而回退到系统字体 */
-:lang(zh) h1,
-:lang(zh) h2,
-:lang(zh) h3,
-:lang(zh) h4,
-:lang(zh-CN) h1,
-:lang(zh-CN) h2,
-:lang(zh-CN) h3,
-:lang(zh-CN) h4 {
-  font-family: var(--pixel-font-cn);
-  text-transform: none;
-}
-
 h1 {
-  font-size: 18px;
+  font-size: 32px;
 }
 h2 {
-  font-size: 14px;
+  font-size: 22px;
 }
 h3 {
-  font-size: 12px;
+  font-size: 18px;
 }
 h4 {
-  font-size: 10px;
+  font-size: 16px;
 }
 
 /* Force the @mmt817/pixel-ui CSS variables to match our theme  */

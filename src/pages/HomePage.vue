@@ -190,7 +190,7 @@ const filtered = computed<NezhaServer[]>(() => {
   padding: 40px;
   text-align: center;
   font-family: var(--pixel-font-en);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--pixel-accent);
 }
 .blink {
@@ -230,8 +230,8 @@ const filtered = computed<NezhaServer[]>(() => {
   color: var(--pixel-text);
   border: none;
   font-family: var(--pixel-font-en);
-  font-size: 9px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
   outline: none;
   cursor: pointer;
 }
@@ -239,7 +239,7 @@ const filtered = computed<NezhaServer[]>(() => {
   padding: 40px;
   text-align: center;
   font-family: var(--pixel-font-en);
-  font-size: 12px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
 }
 .cards {

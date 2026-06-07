@@ -89,20 +89,20 @@ const statusClass = computed(() => (ws.connected ? "ok" : "danger"));
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--pixel-font-en);
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-family: var(--pixel-font-text);
+  font-size: 16px;
   color: var(--pixel-text);
 }
 
 .logo {
   color: var(--pixel-accent);
-  font-size: 20px;
+  font-size: 28px;
+  line-height: 1;
   text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
 
 .brand-text {
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .nav {
@@ -111,8 +111,8 @@ const statusClass = computed(() => (ws.connected ? "ok" : "danger"));
 
 .nav-link {
   font-family: var(--pixel-font-en);
-  font-size: 10px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
   color: var(--pixel-text-dim);
   padding: 6px 10px;
   border: 2px solid transparent;

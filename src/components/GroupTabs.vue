@@ -32,9 +32,9 @@ defineEmits<{
 }
 .tab {
   font-family: var(--pixel-font-en);
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
+  
   padding: 6px 10px;
   background: var(--pixel-bg-alt);
   border: 2px solid var(--pixel-border);

@@ -26,6 +26,6 @@ const { t } = useI18n();
   background: var(--pixel-bg-alt);
   border-top: 4px solid var(--pixel-border);
   padding: 14px 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

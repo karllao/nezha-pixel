@@ -86,19 +86,19 @@ const stats = computed(() => {
 }
 .label {
   font-family: var(--pixel-font-en);
-  font-size: 9px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  
+  
 }
 .value {
   font-family: var(--pixel-font-en);
-  font-size: 16px;
+  font-size: 22px;
   color: var(--pixel-accent);
 }
 .sub {
   font-family: var(--pixel-font-text);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 @media (max-width: 768px) {

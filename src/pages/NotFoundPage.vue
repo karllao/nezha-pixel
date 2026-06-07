@@ -27,7 +27,7 @@ const { t } = useI18n();
 }
 .nf p {
   font-family: var(--pixel-font-en);
-  font-size: 12px;
+  font-size: 14px;
   margin: 0;
 }
 </style>

@@ -266,23 +266,23 @@ const priceTag = computed(() => {
   align-items: center;
   gap: 6px;
   font-family: var(--pixel-font-text);
-  font-size: 13px;
+  font-size: 15px;
 }
 .c-row.metrics {
   gap: 8px;
 }
 .c-name {
   font-family: var(--pixel-font-en);
-  font-size: 10px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  max-width: 260px;
 }
 .c-flag {
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   padding: 2px 4px;
   background: var(--pixel-bg);
   border: 1px solid var(--pixel-border);
@@ -290,8 +290,8 @@ const priceTag = computed(() => {
 }
 .c-due {
   font-family: var(--pixel-font-en);
-  font-size: 9px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  
   padding: 2px 5px;
 }
 .c-due.ok {
@@ -312,14 +312,14 @@ const priceTag = computed(() => {
 }
 .m .k {
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
-  width: 14px;
+  width: 32px;
 }
 .m .v {
   font-family: var(--pixel-font-en);
-  font-size: 9px;
-  width: 24px;
+  font-size: 14px;
+  width: 32px;
   text-align: right;
 }
 .m :deep(.bar) {
@@ -328,28 +328,28 @@ const priceTag = computed(() => {
 }
 .speed {
   font-family: var(--pixel-font-text);
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
 }
 .offline-line {
   font-family: var(--pixel-font-en);
-  font-size: 9px;
+  font-size: 14px;
 }
 .plan-row {
   flex-wrap: wrap;
   gap: 3px !important;
 }
 .plan-row .ptag {
-  font-size: 7px;
-  padding: 2px 4px;
+  font-size: 14px;
+  padding: 2px 5px;
 }
 .note-row {
-  font-size: 12px;
+  font-size: 14px;
   font-family: var(--pixel-font-text);
 }
 .raw-note {
   font-family: var(--pixel-font-text);
-  font-size: 12px;
+  font-size: 14px;
   padding: 4px 6px;
   background: var(--pixel-bg-alt);
   border: 1px dashed var(--pixel-border);
@@ -361,22 +361,22 @@ const priceTag = computed(() => {
   align-items: center;
   gap: 8px;
   font-family: var(--pixel-font-en);
-  font-size: 11px;
+  font-size: 14px;
   flex-wrap: wrap;
 }
 .dot {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
   text-shadow: 0 0 6px currentColor;
 }
 .name {
   font-family: var(--pixel-font-en);
-  font-size: 12px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
+  max-width: 260px;
 }
 .plan-tags {
   display: flex;
@@ -385,10 +385,10 @@ const priceTag = computed(() => {
 }
 .ptag {
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   padding: 2px 5px;
   border: 1px solid var(--pixel-border);
-  letter-spacing: 0.5px;
+  
 }
 .tag-bw {
   background: color-mix(in srgb, var(--pixel-accent) 15%, transparent);
@@ -448,20 +448,20 @@ const priceTag = computed(() => {
   display: flex;
   flex-direction: column;
   font-family: var(--pixel-font-text);
-  font-size: 14px;
+  font-size: 16px;
 }
 .stat .k {
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
-  text-transform: uppercase;
+  
 }
 .stat .v {
   color: var(--pixel-text);
 }
 .offline-msg {
   font-family: var(--pixel-font-en);
-  font-size: 10px;
+  font-size: 14px;
   color: var(--pixel-danger);
   display: flex;
   flex-direction: column;
@@ -470,7 +470,7 @@ const priceTag = computed(() => {
 }
 .offline-msg small {
   font-family: var(--pixel-font-text);
-  font-size: 12px;
+  font-size: 14px;
 }
 .chip.ok {
   color: var(--pixel-ok);

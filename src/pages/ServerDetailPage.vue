@@ -479,10 +479,10 @@ const priceLine = computed(() => {
   flex-wrap: wrap;
 }
 .hero-head h1 {
-  font-size: 16px;
+  font-size: 22px;
 }
 .dot {
-  font-size: 18px;
+  font-size: 22px;
   text-shadow: 0 0 8px currentColor;
 }
 .plan-row {
@@ -492,10 +492,10 @@ const priceLine = computed(() => {
 }
 .ptag {
   font-family: var(--pixel-font-en);
-  font-size: 9px;
+  font-size: 14px;
   padding: 3px 6px;
   border: 1px solid var(--pixel-border);
-  letter-spacing: 0.5px;
+  
 }
 .tag-bw {
   background: color-mix(in srgb, var(--pixel-accent) 15%, transparent);
@@ -577,7 +577,7 @@ const priceLine = computed(() => {
   gap: 6px;
 }
 .info-block h3 {
-  font-size: 10px;
+  font-size: 14px;
   color: var(--pixel-accent);
   border-bottom: 2px dotted var(--pixel-border);
   padding-bottom: 4px;
@@ -585,17 +585,17 @@ const priceLine = computed(() => {
 }
 .kv {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 6px;
+  grid-template-columns: 110px 1fr;
+  gap: 8px;
   font-family: var(--pixel-font-text);
-  font-size: 14px;
+  font-size: 16px;
   align-items: start;
 }
 .kv .k {
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
-  text-transform: uppercase;
+  
   padding-top: 3px;
 }
 .kv .v {
@@ -604,7 +604,7 @@ const priceLine = computed(() => {
 .temp-pill {
   display: inline-block;
   font-family: var(--pixel-font-en);
-  font-size: 8px;
+  font-size: 14px;
   padding: 2px 4px;
   margin: 0 2px 2px 0;
   background: var(--pixel-bg);
@@ -651,7 +651,7 @@ const priceLine = computed(() => {
   padding: 30px;
   text-align: center;
   font-family: var(--pixel-font-en);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--pixel-text-dim);
 }
 .hint.danger {
@@ -661,7 +661,7 @@ const priceLine = computed(() => {
   padding: 40px;
   text-align: center;
   font-family: var(--pixel-font-en);
-  font-size: 11px;
+  font-size: 14px;
 }
 .blink {
   animation: blink 1s steps(2) infinite;

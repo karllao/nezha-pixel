@@ -54,17 +54,17 @@ const segs = computed(() => {
   display: flex;
   justify-content: space-between;
   font-family: var(--pixel-font-en);
-  font-size: 9px;
-  text-transform: uppercase;
+  font-size: 14px;
+  
 }
 .bar.sm .bar-head {
-  font-size: 8px;
+  font-size: 14px;
 }
 .bar-label {
   color: var(--pixel-text-dim);
 }
 .bar-value {
-  letter-spacing: 1px;
+  
 }
 .bar-track {
   display: flex;
