@@ -45,8 +45,8 @@ web/
 
 ```bash
 cd web
-pnpm install        # 或 npm install / bun install
-pnpm dev            # 默认 http://localhost:5173
+npm install        # 或 pnpm install / bun install
+npm run dev            # 默认 http://localhost:5173
 ```
 
 如果后端地址不是 `localhost:8008`，请在 `vite.config.ts` 中调整 `proxy.target`。
@@ -60,7 +60,7 @@ cd web
 cp .env.example .env.local
 # 编辑 .env.local，填入线上地址
 #   VITE_API_TARGET=https://your-nezha.example.com
-pnpm dev
+npm run dev
 ```
 
 打开 http://localhost:5173 即可，**页面 UI 走本地热更新，数据来自线上**。
@@ -76,10 +76,10 @@ pnpm dev
 
 ```bash
 # 构建到 web/dist
-pnpm build
+npm  run build
 
 # 直接构建到 nezha 后端的 user-dist 目录，便于嵌入打包
-pnpm build:user-dist
+npm run build:user-dist
 ```
 
 > `build:user-dist` 会输出到 `../nezha/dashboard/user-dist`，nezha 后端通过 `go:embed` 在 `dashboard` 目录下嵌入静态资源后即可作为默认用户前端。
