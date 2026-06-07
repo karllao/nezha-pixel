@@ -22,7 +22,7 @@
 ## 项目结构
 
 ```
-web/
+nezha-pixel/
 ├─ index.html
 ├─ vite.config.ts          # 含 /api/v1 与 /api/v1/ws/server 反向代理
 ├─ src/
@@ -44,7 +44,7 @@ web/
 后端 nezha 默认监听 `:8008`。开发模式下 Vite 已配置代理：
 
 ```bash
-cd web
+cd nezha-pixel
 npm install        # 或 pnpm install / bun install
 npm run dev            # 默认 http://localhost:5173
 ```
@@ -56,7 +56,7 @@ npm run dev            # 默认 http://localhost:5173
 无需改代码，通过 `.env.local` 把代理指向线上 nezha：
 
 ```bash
-cd web
+cd nezha-pixel
 cp .env.example .env.local
 # 编辑 .env.local，填入线上地址
 #   VITE_API_TARGET=https://your-nezha.example.com
@@ -75,7 +75,7 @@ npm run dev
 ## 构建
 
 ```bash
-# 构建到 web/dist
+# 构建到 nezha-pixel/dist
 npm  run build
 
 # 直接构建到 nezha 后端的 user-dist 目录，便于嵌入打包
@@ -100,7 +100,7 @@ docker run -d \
 
 ```yaml
 services:
-  nezha-pixel-web:
+  nezha-pixel:
     image: ghcr.io/karllao/nezha-pixel:latest
     container_name: nezha-pixel
     restart: unless-stopped
@@ -133,7 +133,7 @@ status.example.com {
 }
 ```
 
-如果 nezha 后端和 Caddy 都在 docker compose 同一网络里，把 `127.0.0.1:8008` / `127.0.0.1:8081` 换成对应的 service 名即可，例如 `nezha:8008` / `nezha-pixel-web:80`。
+如果 nezha 后端和 Caddy 都在 docker compose 同一网络里，把 `127.0.0.1:8008` / `127.0.0.1:8081` 换成对应的 service 名即可，例如 `nezha:8008` / `nezha-pixel:80`。
 
 访问效果：
 
