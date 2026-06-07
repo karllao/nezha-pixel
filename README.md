@@ -86,18 +86,6 @@ npm run build:user-dist
 
 ## Docker 部署
 
-本目录是一个**独立的前端项目**，自带 GitHub Actions（`.github/workflows/docker.yml`）—— 把 `web/` 单独推到一个 GitHub 仓库（例如 `karllao/nezha-pixel-web`），每次推送默认分支或打 `v*` tag 时会自动构建 **多架构（linux/amd64 + linux/arm64）** 镜像并推送到 GitHub Container Registry，镜像名直接跟随仓库名：
-
-```
-ghcr.io/karllao/nezha-pixel-web:latest        # 默认分支最新构建
-ghcr.io/karllao/nezha-pixel-web:v1.2.3        # 对应的 tag
-ghcr.io/karllao/nezha-pixel-web:sha-<short>   # 每次 commit 的短 sha
-```
-
-> GitHub 只识别**仓库根目录**下的 `.github/workflows/`，所以请直接把 `web/` 作为仓库根推送（而不是把整个 `nezha-pixel` 父目录推上去），否则 workflow 不会触发。Fork 后默认分支推送一次或手动触发 `Build & Push Docker Image` workflow 即可生成镜像；如果包默认是 private，进入 GitHub Packages 设置改成 public 才能匿名 `docker pull`。
-
-镜像本身只是一个内置 SPA history 兜底的 Nginx，**不带任何后端**，需要前置反代把 `/api/v1` 与 WebSocket 转给原版 nezha 后端。
-
 ### 直接 `docker run`
 
 ```bash
@@ -121,14 +109,6 @@ services:
 ```
 
 ### Caddy 反代示例
-
-下面这段 `Caddyfile` 实现：
-
-- `/dashboard` 与 `/dashboard/*` → **原版 nezha 后台**（保留官方管理界面）
-- `/api/v1/*`（含 `/api/v1/ws/server` WebSocket）→ **原版 nezha 后端**（像素前台从这里拉数据）
-- 其它任意路径 → **像素前台容器**（首页、详情页、服务页、404 等 SPA 路由）
-
-假设原版 nezha 后端跑在宿主机 `127.0.0.1:8008`，像素前台容器映射在 `127.0.0.1:8081`：
 
 ```caddy
 status.example.com {
