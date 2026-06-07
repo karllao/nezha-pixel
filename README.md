@@ -90,10 +90,10 @@ npm run build:user-dist
 
 ```bash
 docker run -d \
-  --name nezha-pixel-web \
+  --name nezha-pixel \
   --restart=unless-stopped \
   -p 127.0.0.1:8081:80 \
-  ghcr.io/karllao/nezha-pixel-web:latest
+  ghcr.io/karllao/nezha-pixel:latest
 ```
 
 ### docker-compose 示例
@@ -101,8 +101,8 @@ docker run -d \
 ```yaml
 services:
   nezha-pixel-web:
-    image: ghcr.io/karllao/nezha-pixel-web:latest
-    container_name: nezha-pixel-web
+    image: ghcr.io/karllao/nezha-pixel:latest
+    container_name: nezha-pixel
     restart: unless-stopped
     ports:
       - "127.0.0.1:8081:80"
