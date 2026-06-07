@@ -39,6 +39,80 @@ nezha-pixel/
 └─ public/favicon.svg
 ```
 
+## Docker 部署
+
+### 直接 `docker run`
+
+```bash
+docker run -d \
+  --name nezha-pixel \
+  --restart=unless-stopped \
+  -p 127.0.0.1:8081:80 \
+  ghcr.io/karllao/nezha-pixel:latest
+```
+
+### docker-compose 示例
+
+```yaml
+services:
+  nezha-pixel:
+    image: ghcr.io/karllao/nezha-pixel:latest
+    container_name: nezha-pixel
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:80"
+```
+
+### Caddy 反代示例
+
+假设原版 nezha 后端跑在宿主机 `127.0.0.1:8008`，像素前台容器映射在 `127.0.0.1:8081`：
+
+```caddy
+status.example.com {
+    encode zstd gzip
+
+    # 1) Agent ↔ Dashboard 的 gRPC (h2c) —— 与官方模板完全一致，必须保留
+    @grpcProto path /proto.NezhaService/*
+    handle @grpcProto {
+        reverse_proxy {
+            header_up Host {host}
+            header_up nz-realip {http.CF-Connecting-IP}  # CDN 透传的真实 IP header，CloudFlare 默认是 CF-Connecting-IP
+            # header_up nz-realip {remote_host}          # 如果 Caddy 直接对外（不走 CDN），注释上一行、启用本行
+            transport http {
+                versions h2c
+                read_buffer 4096
+            }
+            to 127.0.0.1:8008
+        }
+    }
+
+    # 2) 原版 nezha 后台 + REST API + WebSocket —— 复用官方模板的 header_up
+    @nezha path /dashboard /dashboard/* /api/v1 /api/v1/*
+    handle @nezha {
+        reverse_proxy {
+            header_up Host {host}
+            header_up Origin https://{host}              # 防止 nezha WS 因 Origin 校验拒绝升级
+            header_up nz-realip {http.CF-Connecting-IP}
+            # header_up nz-realip {remote_host}
+            transport http {
+                read_buffer 16384
+            }
+            to 127.0.0.1:8008
+        }
+    }
+
+    # 3) 其它请求 → 像素前台
+    handle {
+        reverse_proxy 127.0.0.1:8081
+    }
+}
+```
+
+如果 nezha 后端和 Caddy 都在 docker compose 同一网络里，把 `127.0.0.1:8008` / `127.0.0.1:8081` 换成对应的 service 名即可，例如 `nezha:8008` / `nezha-pixel:80`。
+
+> 如果你只想暴露像素前台、隐藏管理后台，把 `@nezha` 那段的 `path` 改成只剩 `/api/v1 /api/v1/*` 即可——`/dashboard` 会被 SPA 兜底走到 404 页面。**注意 `@grpcProto` 那段不能删**，否则所有 agent 都会掉线。
+
+
 ## 开发
 
 后端 nezha 默认监听 `:8008`。开发模式下 Vite 已配置代理：
@@ -84,107 +158,6 @@ npm run build:user-dist
 
 > `build:user-dist` 会输出到 `../nezha/dashboard/user-dist`，nezha 后端通过 `go:embed` 在 `dashboard` 目录下嵌入静态资源后即可作为默认用户前端。
 
-## Docker 部署
-
-### 直接 `docker run`
-
-```bash
-docker run -d \
-  --name nezha-pixel \
-  --restart=unless-stopped \
-  -p 127.0.0.1:8081:80 \
-  ghcr.io/karllao/nezha-pixel:latest
-```
-
-### docker-compose 示例
-
-```yaml
-services:
-  nezha-pixel:
-    image: ghcr.io/karllao/nezha-pixel:latest
-    container_name: nezha-pixel
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:8081:80"
-```
-
-### Caddy 反代示例
-
-在 [官方 nezha Caddy 模板](https://nezha.wiki/) 的基础上加一段 SPA 兜底即可。整体路由：
-
-- `/proto.NezhaService/*` → **原版 nezha 后端**（gRPC over h2c，**agent 上报必经的通道，不能删**）
-- `/dashboard` 与 `/dashboard/*` → **原版 nezha 管理后台**
-- `/api/v1` 与 `/api/v1/*`（含 `/api/v1/ws/server` WebSocket）→ **原版 nezha 后端**（像素前台从这里拉数据，Caddy 会自动识别 Upgrade 头升级 WS）
-- 其它任意路径 → **像素前台容器**（首页、详情页、服务页、404 等 SPA 路由）
-
-假设原版 nezha 后端跑在宿主机 `127.0.0.1:8008`，像素前台容器映射在 `127.0.0.1:8081`：
-
-```caddy
-status.example.com {
-    encode zstd gzip
-
-    # 1) Agent ↔ Dashboard 的 gRPC (h2c) —— 与官方模板完全一致，必须保留
-    @grpcProto path /proto.NezhaService/*
-    handle @grpcProto {
-        reverse_proxy {
-            header_up Host {host}
-            header_up nz-realip {http.CF-Connecting-IP}  # CDN 透传的真实 IP header，CloudFlare 默认是 CF-Connecting-IP
-            # header_up nz-realip {remote_host}          # 如果 Caddy 直接对外（不走 CDN），注释上一行、启用本行
-            transport http {
-                versions h2c
-                read_buffer 4096
-            }
-            to 127.0.0.1:8008
-        }
-    }
-
-    # 2) 原版 nezha 后台 + REST API + WebSocket —— 复用官方模板的 header_up
-    @nezha path /dashboard /dashboard/* /api/v1 /api/v1/*
-    handle @nezha {
-        reverse_proxy {
-            header_up Host {host}
-            header_up Origin https://{host}              # 防止 nezha WS 因 Origin 校验拒绝升级
-            header_up nz-realip {http.CF-Connecting-IP}
-            # header_up nz-realip {remote_host}
-            transport http {
-                read_buffer 16384
-            }
-            to 127.0.0.1:8008
-        }
-    }
-
-    # 3) 其它请求 → 像素前台
-    handle {
-        reverse_proxy 127.0.0.1:8081
-    }
-}
-```
-
-相比官方模板多出来的那两段（@nezha 与默认 handle），以及为什么这些 `header_up` 必须保留：
-
-| header / 配置 | 作用 |
-| --- | --- |
-| `header_up Host {host}` | 让 nezha 看到真实访问域名（生成跳转 URL、Cookie Domain 等都依赖它） |
-| `header_up Origin https://{host}` | nezha WebSocket 会校验 Origin，强制改写后 `/api/v1/ws/server` 升级才不会被拒 |
-| `header_up nz-realip {...}` | nezha 的封禁、登录失败计数、agent 鉴权都要拿到客户端真实 IP；走 CDN 用 CDN 透传的 header，Caddy 直接对外则改用 `{remote_host}` |
-| `transport http { versions h2c }` | gRPC 需要 HTTP/2 明文（h2c）才能直连 nezha 的 8008 |
-| `transport http { read_buffer ... }` | 与官方模板一致，提高大请求 / 大推送时的吞吐 |
-
-如果 nezha 后端和 Caddy 都在 docker compose 同一网络里，把 `127.0.0.1:8008` / `127.0.0.1:8081` 换成对应的 service 名即可，例如 `nezha:8008` / `nezha-pixel:80`。
-
-访问效果：
-
-| 入口 | 实际后端 |
-| --- | --- |
-| `https://status.example.com/` | 像素前台首页 |
-| `https://status.example.com/server/1` | 像素前台单机详情（SPA 路由由容器 nginx 兜底） |
-| `https://status.example.com/services` | 像素前台服务监控页 |
-| `https://status.example.com/api/v1/...` | 原版 nezha REST API |
-| `wss://status.example.com/api/v1/ws/server` | 原版 nezha WebSocket 实时推送 |
-| `https://status.example.com/dashboard` | 原版 nezha 管理后台 |
-| `https://status.example.com/proto.NezhaService/*` | nezha agent 上报的 gRPC 通道（h2c） |
-
-> 如果你只想暴露像素前台、隐藏管理后台，把 `@nezha` 那段的 `path` 改成只剩 `/api/v1 /api/v1/*` 即可——`/dashboard` 会被 SPA 兜底走到 404 页面。**注意 `@grpcProto` 那段不能删**，否则所有 agent 都会掉线。
 
 ## API 来源
 

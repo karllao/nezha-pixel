@@ -123,21 +123,27 @@ const priceTag = computed(() => {
       <template v-if="info.online">
         <div class="c-row metrics">
           <div class="m">
-            <span class="k">CPU</span>
+            <span class="k">C</span>
             <PixelBar :value="info.cpu" size="sm" :segments="10" :show-value="false" />
             <span class="v" :title="`CPU ${info.cpu.toFixed(1)}%`">
               {{ info.cpu.toFixed(0) }}
             </span>
           </div>
+          <span class="divider" aria-hidden="true" />
           <div class="m">
             <span class="k">M</span>
             <PixelBar :value="info.mem" size="sm" :segments="10" :show-value="false" />
-            <span class="v">{{ info.mem.toFixed(0) }}</span>
+            <span class="v" :title="`MEM ${info.mem.toFixed(1)}%`">
+              {{ info.mem.toFixed(0) }}
+            </span>
           </div>
+          <span class="divider" aria-hidden="true" />
           <div class="m">
             <span class="k">D</span>
             <PixelBar :value="info.disk" size="sm" :segments="10" :show-value="false" />
-            <span class="v">{{ info.disk.toFixed(0) }}</span>
+            <span class="v" :title="`DISK ${info.disk.toFixed(1)}%`">
+              {{ info.disk.toFixed(0) }}
+            </span>
           </div>
           <span class="spacer" />
           <span class="speed">↑{{ formatSpeed(info.up) }}</span>
@@ -190,12 +196,10 @@ const priceTag = computed(() => {
       </div>
 
       <template v-else>
-        <div class="meta">
-          <span v-if="info.platform" class="chip">
+        <div v-if="info.platform" class="meta">
+          <span class="chip">
             {{ info.platform }}{{ info.platform_version ? " " + info.platform_version : "" }}
           </span>
-          <span v-if="info.arch" class="chip">{{ info.arch }}</span>
-          <span v-if="info.version" class="chip">v{{ info.version }}</span>
         </div>
 
         <div class="bars">
@@ -269,12 +273,12 @@ const priceTag = computed(() => {
   font-size: 15px;
 }
 .c-row.metrics {
-  gap: 8px;
+  gap: 10px;
 }
 .c-name {
   font-family: var(--pixel-font-en);
   font-size: 14px;
-  
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -306,20 +310,28 @@ const priceTag = computed(() => {
 .m {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
   flex: 1;
+}
+.divider {
+  flex: 0 0 2px;
+  align-self: stretch;
+  background: var(--pixel-border);
+  margin: 3px 0;
 }
 .m .k {
   font-family: var(--pixel-font-en);
   font-size: 14px;
   color: var(--pixel-text-dim);
-  width: 32px;
+  width: 12px;
+  text-align: center;
+  letter-spacing: 0;
 }
 .m .v {
   font-family: var(--pixel-font-en);
   font-size: 14px;
-  width: 32px;
+  width: 28px;
   text-align: right;
 }
 .m :deep(.bar) {

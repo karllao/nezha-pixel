@@ -7,7 +7,14 @@ const { t } = useI18n();
 <template>
   <footer class="px-footer">
     <div class="container row">
-      <span class="muted">© Nezha Pixel</span>
+      <a
+        href="https://github.com/karllao/nezha-pixel"
+        target="_blank"
+        rel="noreferrer"
+        class="brand-link"
+      >
+        © Nezha Pixel
+      </a>
       <span class="spacer" />
       <span v-if="version" class="chip">v{{ version }}</span>
       <a
@@ -27,5 +34,15 @@ const { t } = useI18n();
   border-top: 4px solid var(--pixel-border);
   padding: 14px 0;
   font-size: 16px;
+}
+.brand-link {
+  color: var(--pixel-text-dim);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.brand-link:hover {
+  color: var(--pixel-accent);
 }
 </style>
