@@ -12,6 +12,13 @@
 - 🔍 按分组 / 在线状态过滤，按 CPU/MEM/网速排序
 - 🛠 与官方 nezha-dash 完全相同的 API 路径与字段，可直接挂到现有 nezha 后端使用
 
+## 截图
+| 场景 | 白日模式 | 黑夜模式 |
+|:---:|:---:|:---:|
+| 主页 | ![Light-full](screenshots/light-full.png) | ![Dark-full](screenshots/dark-full.png) |
+| 简约 | ![Light-simple](screenshots/light-simple.png) | ![Dark-simple](screenshots/dark-simple.png) |
+| 详情页 | ![Light-details](screenshots/light-details.png) | ![Dark-details](screenshots/dark-details.png) |
+
 ## 项目结构
 
 ```
