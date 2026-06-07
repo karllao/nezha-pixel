@@ -1,0 +1,17 @@
+node_modules
+dist
+.git
+.github
+.vite
+.cert
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.DS_Store
+screenshots
+README.md
+LICENSE
+tsconfig.app.tsbuildinfo
+tsconfig.node.tsbuildinfo
