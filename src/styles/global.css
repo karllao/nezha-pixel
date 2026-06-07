@@ -1,0 +1,313 @@
+/* Pixel-themed global styles */
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap");
+
+/* Cubic 11 — open-source CJK pixel font (OFL), ~400KB
+ * https://github.com/ACh-K/Cubic-11
+ * 同时覆盖中文/日文/韩文 + 西文，效果与英文像素字体接近，行高合适 12px 网格 */
+@font-face {
+  font-family: "Cubic 11";
+  font-display: swap;
+  src: url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@1.451/fonts/web/Cubic_11.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@1.451/fonts/web/Cubic_11.woff")
+      format("woff");
+}
+
+:root {
+  --pixel-bg: #0f0f1a;
+  --pixel-bg-alt: #14142b;
+  --pixel-surface: #1c1c33;
+  --pixel-border: #2a2a4a;
+  --pixel-text: #e7e7f3;
+  --pixel-text-dim: #9a9ab8;
+  --pixel-accent: #7df9ff;
+  --pixel-accent-2: #ffd23f;
+  --pixel-ok: #5eff85;
+  --pixel-warn: #ffb84d;
+  --pixel-danger: #ff5c7a;
+  --pixel-shadow: #000000;
+  --pixel-grid: rgba(125, 249, 255, 0.05);
+  /* 强调色按钮上的对比文字：暗模式下用深色，便于"色块按钮"高亮 */
+  --pixel-on-accent: #0f0f1a;
+  /* 标题/字号小的英文继续用 Press Start 2P；中文走 Cubic 11 */
+  --pixel-font-en: "Press Start 2P", "Cubic 11", monospace;
+  /* 正文同时兼顾中英文 — VT323 渲染英文很像素，Cubic 11 渲染中日韩 */
+  --pixel-font-text: "VT323", "Cubic 11", "Press Start 2P", monospace;
+  /* 纯像素中文字体（标签 / 强调）—— 中文像素效果最佳 */
+  --pixel-font-cn: "Cubic 11", "VT323", monospace;
+}
+
+[data-theme="light"] {
+  /* 像素游戏浅模式：米黄底 + 墨色描边 + 高饱和深色强调
+   * 设计目标：所有强调色与米色底对比度 ≥ 4.5:1（WCAG AA） */
+  --pixel-bg: #f6f1e1;
+  --pixel-bg-alt: #ebe3c8;
+  --pixel-surface: #fffbef;
+  --pixel-border: #2b2440;
+  --pixel-text: #1a1530;
+  --pixel-text-dim: #5a4d77;
+  /* 强调色全部换成深而饱和的版本：浅底上才能看清 */
+  --pixel-accent: #1d4ed8;        /* 深宝蓝（原青色） */
+  --pixel-accent-2: #b8480f;      /* 砖红橙（原亮黄） */
+  --pixel-ok: #117a3a;             /* 墨绿（原亮绿） */
+  --pixel-warn: #b35900;           /* 焦橙（原浅橙） */
+  --pixel-danger: #b8123f;         /* 深紫红（原粉红） */
+  --pixel-shadow: #2b2440;         /* 与 border 一致，投影更立体 */
+  --pixel-grid: rgba(43, 36, 64, 0.07); /* 浅底用深色网格 */
+  --pixel-on-accent: #fffbef;       /* 浅模式下深底按钮用近白文字 */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  background: var(--pixel-bg);
+  color: var(--pixel-text);
+  font-family: var(--pixel-font-text);
+  font-size: 18px;
+  line-height: 1.4;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  /* 关闭抗锯齿，让中文像素字体 Cubic 11 显示更锐利 */
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeSpeed;
+  font-synthesis: none;
+  background-image:
+    linear-gradient(var(--pixel-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pixel-grid) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* 中文/CJK 元素：使用 Cubic 11 并按 11px 整数倍渲染避免插值模糊 */
+:lang(zh),
+:lang(zh-CN),
+:lang(ja),
+:lang(ko) {
+  font-family: var(--pixel-font-cn);
+}
+
+/* 中文模式下统一把所有 --pixel-font-en 引用改成 Cubic 11，
+ * 这样使用了 --pixel-font-en 的标签 / 标题 / 按钮 也都是像素中文。 */
+html[lang^="zh"] {
+  --pixel-font-en: "Cubic 11", "Press Start 2P", monospace;
+  --pixel-font-text: "Cubic 11", "VT323", monospace;
+}
+
+a {
+  color: var(--pixel-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--pixel-accent-2);
+}
+
+/* Pixel borders helper */
+.pixel-border {
+  border: 2px solid var(--pixel-border);
+  box-shadow:
+    0 0 0 2px var(--pixel-bg) inset,
+    4px 4px 0 0 var(--pixel-shadow);
+  background: var(--pixel-surface);
+}
+
+.pixel-title {
+  font-family: var(--pixel-font-en);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--pixel-bg-alt);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-border);
+  border: 2px solid var(--pixel-bg-alt);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-accent);
+}
+
+/* Layout helpers */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.muted {
+  color: var(--pixel-text-dim);
+}
+
+.ok {
+  color: var(--pixel-ok);
+}
+.warn {
+  color: var(--pixel-warn);
+}
+.danger {
+  color: var(--pixel-danger);
+}
+
+.grid {
+  display: grid;
+  gap: 12px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tiny chips for OS / arch / etc */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--pixel-font-en);
+  font-size: 9px;
+  padding: 4px 6px;
+  background: var(--pixel-bg-alt);
+  border: 2px solid var(--pixel-border);
+  color: var(--pixel-text);
+  text-transform: uppercase;
+}
+
+/* 中文 chip 字号略放大，Cubic 11 在 11/22px 下最锐利 */
+html[lang^="zh"] .chip {
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+html[lang^="zh"] h1 {
+  font-size: 20px;
+}
+html[lang^="zh"] h2 {
+  font-size: 16px;
+}
+html[lang^="zh"] h3 {
+  font-size: 14px;
+}
+html[lang^="zh"] h4 {
+  font-size: 12px;
+}
+
+.chip.ok {
+  background: color-mix(in srgb, var(--pixel-ok) 14%, transparent);
+  border-color: var(--pixel-ok);
+  color: var(--pixel-ok);
+}
+
+.chip.warn {
+  background: color-mix(in srgb, var(--pixel-warn) 14%, transparent);
+  border-color: var(--pixel-warn);
+  color: var(--pixel-warn);
+}
+
+.chip.danger {
+  background: color-mix(in srgb, var(--pixel-danger) 14%, transparent);
+  border-color: var(--pixel-danger);
+  color: var(--pixel-danger);
+}
+
+/* 浅模式下半透明背景与浅底融合后看起来淡，加深 alpha */
+[data-theme="light"] .chip.ok,
+[data-theme="light"] .chip.warn,
+[data-theme="light"] .chip.danger {
+  background: color-mix(in srgb, currentColor 12%, white);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--pixel-font-en);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* 中文模式下标题改用 Cubic 11，否则会因 Press Start 2P 无中文而回退到系统字体 */
+:lang(zh) h1,
+:lang(zh) h2,
+:lang(zh) h3,
+:lang(zh) h4,
+:lang(zh-CN) h1,
+:lang(zh-CN) h2,
+:lang(zh-CN) h3,
+:lang(zh-CN) h4 {
+  font-family: var(--pixel-font-cn);
+  text-transform: none;
+}
+
+h1 {
+  font-size: 18px;
+}
+h2 {
+  font-size: 14px;
+}
+h3 {
+  font-size: 12px;
+}
+h4 {
+  font-size: 10px;
+}
+
+/* Force the @mmt817/pixel-ui CSS variables to match our theme  */
+.px-button,
+.px-card,
+.px-tag,
+.px-badge {
+  --px-color-primary: var(--pixel-accent);
+  --px-color-text: var(--pixel-text);
+}
