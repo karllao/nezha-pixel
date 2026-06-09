@@ -568,6 +568,37 @@ const priceLine = computed(() => {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 640px) {
+  .hero {
+    padding: 12px;
+  }
+  .hero-head h1 {
+    font-size: 18px;
+  }
+  .kv {
+    grid-template-columns: 88px 1fr;
+    gap: 6px;
+    font-size: 14px;
+  }
+  .info-block {
+    padding: 10px;
+  }
+  .info-block h3 {
+    font-size: 13px;
+  }
+  .period-tabs {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 380px) {
+  .kv {
+    grid-template-columns: 72px 1fr;
+    font-size: 13px;
+  }
+  .hero-head h1 {
+    font-size: 16px;
+  }
+}
 .info-block {
   background: var(--pixel-bg-alt);
   border: 2px solid var(--pixel-border);

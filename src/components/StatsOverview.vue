@@ -116,4 +116,18 @@ const stats = computed(() => {
     border-bottom: none;
   }
 }
+@media (max-width: 640px) {
+  .cell {
+    padding: 10px 12px;
+  }
+  .label {
+    font-size: 12px;
+  }
+  .value {
+    font-size: 18px;
+  }
+  .sub {
+    font-size: 13px;
+  }
+}
 </style>

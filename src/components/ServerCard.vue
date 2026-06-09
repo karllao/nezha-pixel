@@ -496,4 +496,67 @@ const priceTag = computed(() => {
   color: var(--pixel-danger);
   border-color: var(--pixel-danger);
 }
+
+/* ===== Mobile ===== */
+@media (max-width: 640px) {
+  .card.compact {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  /* metrics 行让两个速度换到下一行 */
+  .c-row.metrics {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  /* spacer 在 mobile 下作为换行符 —— flex-basis 100% 撑满本行 */
+  .c-row.metrics > .spacer {
+    flex: 1 0 100%;
+    height: 0;
+    margin: 0;
+  }
+  .c-row.metrics .speed {
+    flex: 1;
+    text-align: center;
+  }
+  /* compact 顶部行：名称收紧、避免到期 chip 被挤掉 */
+  .c-name {
+    max-width: none;
+    flex: 1;
+    min-width: 0;
+  }
+  /* compact 顶部行：到期 chip 缩字号 */
+  .c-due {
+    font-size: 12px;
+    padding: 2px 4px;
+  }
+  /* detail 卡片 stats 3 列 → 2 列 */
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 380px) {
+  .card.compact {
+    padding: 6px 8px;
+  }
+  .m .k {
+    width: 10px;
+    font-size: 12px;
+  }
+  .m .v {
+    width: 24px;
+    font-size: 12px;
+  }
+  .c-row.metrics {
+    gap: 6px;
+  }
+  .c-row.metrics .speed {
+    font-size: 13px;
+  }
+  /* 紧凑模式国家旗标在极窄屏可以省掉 */
+  .c-flag {
+    font-size: 12px;
+    padding: 1px 3px;
+  }
+}
 </style>

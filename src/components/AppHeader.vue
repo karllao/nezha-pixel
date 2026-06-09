@@ -142,4 +142,38 @@ const statusClass = computed(() => (ws.connected ? "ok" : "danger"));
   border-color: var(--pixel-accent);
   color: var(--pixel-on-accent);
 }
+
+@media (max-width: 640px) {
+  .px-header {
+    padding: 10px 0;
+  }
+  .nav {
+    gap: 4px;
+  }
+  .nav-link {
+    padding: 5px 7px;
+    font-size: 12px;
+  }
+  .brand-text {
+    font-size: 13px;
+  }
+  .logo {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  /* 极窄屏隐藏 brand 文字，只留 logo */
+  .brand-text {
+    display: none;
+  }
+  /* 状态 chip 在极窄屏只保留圆点 */
+  .nav {
+    gap: 2px;
+  }
+  .nav-link {
+    padding: 4px 6px;
+    font-size: 11px;
+  }
+}
 </style>

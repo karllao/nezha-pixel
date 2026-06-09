@@ -197,6 +197,42 @@ a:hover {
   }
 }
 
+/* 移动端：container 收紧、chip 缩小、字号略降，避免溢出 */
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+  .container {
+    padding: 0 12px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  .chip {
+    font-size: 13px;
+    padding: 5px 7px;
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    font-size: 14px;
+  }
+  .container {
+    padding: 0 8px;
+  }
+  .chip {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+}
+
 /* Tiny chips for OS / arch / etc — 14px 给足像素颗粒感且不过大 */
 .chip {
   display: inline-flex;

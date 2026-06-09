@@ -296,4 +296,31 @@ function getNum(v: number | Record<string, number>, key: string): number {
   font-family: var(--pixel-font-text);
   font-size: 16px;
 }
+
+@media (max-width: 640px) {
+  .page-head h1 {
+    font-size: 18px;
+  }
+  .svc {
+    padding: 10px;
+  }
+  .svc-meta {
+    gap: 6px;
+  }
+  .svc-meta .v {
+    font-size: 14px;
+  }
+  .cycle {
+    padding: 10px;
+  }
+  .cycle-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .cycle-stats {
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+}
 </style>

@@ -59,4 +59,9 @@ onUnmounted(() => {
   flex: 1;
   padding: 24px 16px 32px;
 }
+@media (max-width: 640px) {
+  .app-main {
+    padding: 16px 0 24px;
+  }
+}
 </style>

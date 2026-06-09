@@ -255,4 +255,18 @@ const filtered = computed<NezhaServer[]>(() => {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 640px) {
+  .toolbar {
+    gap: 6px;
+  }
+  .filters {
+    gap: 4px;
+    width: 100%;
+  }
+  .filters .chip,
+  .filters .view-toggle .chip {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+}
 </style>
