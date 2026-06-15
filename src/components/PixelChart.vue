@@ -244,7 +244,6 @@ const headValue = computed(() =>
   color: var(--pixel-text-dim);
 }
 .value {
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .svg-wrap {
   position: relative;
@@ -276,6 +275,5 @@ const headValue = computed(() =>
 .tt-val {
   font-family: var(--pixel-font-en);
   font-size: 15px;
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 </style>

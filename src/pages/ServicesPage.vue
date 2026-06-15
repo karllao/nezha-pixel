@@ -181,12 +181,10 @@ function getNum(v: number | Record<string, number>, key: string): number {
 .page-head h1 {
   font-size: 24px;
   color: var(--pixel-text);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
 .col > h2 {
   font-size: 18px;
   color: var(--pixel-text);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
   border-left: 4px solid var(--pixel-accent);
   padding: 4px 10px;
   background: var(--pixel-bg-alt);
@@ -221,7 +219,6 @@ function getNum(v: number | Record<string, number>, key: string): number {
   font-family: var(--pixel-font-en);
   font-size: 18px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .svc-meta {
   display: grid;
@@ -243,7 +240,6 @@ function getNum(v: number | Record<string, number>, key: string): number {
   font-family: var(--pixel-font-text);
   font-size: 17px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .timeline {
   display: flex;
@@ -275,7 +271,6 @@ function getNum(v: number | Record<string, number>, key: string): number {
   font-family: var(--pixel-font-en);
   font-size: 18px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .cycle-row {
   display: flex;

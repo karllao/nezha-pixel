@@ -487,7 +487,6 @@ const priceLine = computed(() => {
 .hero-head h1 {
   font-size: 28px;
   color: var(--pixel-text);
-  text-shadow: 3px 3px 0 var(--pixel-shadow);
   line-height: 1;
 }
 .dot {
@@ -591,7 +590,6 @@ const priceLine = computed(() => {
   }
   .hero-head h1 {
     font-size: 20px;
-    text-shadow: 2px 2px 0 var(--pixel-shadow);
   }
   .kv {
     grid-template-columns: 88px 1fr;
@@ -628,7 +626,6 @@ const priceLine = computed(() => {
 .info-block h3 {
   font-size: 16px;
   color: var(--pixel-accent);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
   border-bottom: 2px dotted var(--pixel-border);
   padding-bottom: 6px;
   margin-bottom: 6px;
@@ -672,7 +669,6 @@ const priceLine = computed(() => {
 .monitors h2 {
   font-size: 18px;
   color: var(--pixel-text);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
   border-left: 4px solid var(--pixel-accent);
   padding: 4px 10px;
   background: var(--pixel-bg-alt);

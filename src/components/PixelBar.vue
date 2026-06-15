@@ -66,7 +66,6 @@ const segs = computed(() => {
 }
 .bar-value {
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .bar-track {
   display: flex;

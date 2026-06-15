@@ -94,7 +94,6 @@ const stats = computed(() => {
   font-family: var(--pixel-font-en);
   font-size: 24px;
   color: var(--pixel-accent);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
   line-height: 1.1;
 }
 .sub {

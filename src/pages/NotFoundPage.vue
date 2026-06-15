@@ -23,7 +23,6 @@ const { t } = useI18n();
 .nf h1 {
   font-size: 48px;
   color: var(--pixel-accent);
-  text-shadow: 4px 4px 0 var(--pixel-shadow);
 }
 .nf p {
   font-family: var(--pixel-font-en);

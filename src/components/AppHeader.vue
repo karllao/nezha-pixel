@@ -92,14 +92,12 @@ const statusClass = computed(() => (ws.connected ? "ok" : "danger"));
   font-family: var(--pixel-font-text);
   font-size: 18px;
   color: var(--pixel-text);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
 
 .logo {
   color: var(--pixel-accent);
   font-size: 28px;
   line-height: 1;
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
 
 .brand-text {

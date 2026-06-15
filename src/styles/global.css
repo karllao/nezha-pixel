@@ -207,21 +207,11 @@ a:hover {
   color: var(--pixel-danger);
 }
 
-/* ===== 像素强调工具类 ===== */
-/* 像素硬阴影 —— 给文字添加 1-2px 偏移黑影，模拟像素游戏的描边粗体效果，
- * 没有插值模糊，配合 Cubic 11 视觉上像 "bold + outlined" */
-.px-emph {
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
-}
-.px-emph-sm {
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
-}
-/* 强调标题：accent 色 + 硬阴影 */
+/* 强调色文字工具类 */
 .px-hl {
   color: var(--pixel-accent);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
-/* 节标题分隔条 —— 用底色横条强调段落标题 */
+/* 节标题分隔条 —— 用底色横条 + 左色边强调段落标题 */
 .section-title {
   display: inline-block;
   background: var(--pixel-bg-alt);

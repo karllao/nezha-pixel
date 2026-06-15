@@ -284,7 +284,6 @@ const priceTag = computed(() => {
   font-family: var(--pixel-font-en);
   font-size: 17px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -338,7 +337,6 @@ const priceTag = computed(() => {
   font-family: var(--pixel-font-en);
   font-size: 16px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
   width: 30px;
   text-align: right;
 }
@@ -350,7 +348,6 @@ const priceTag = computed(() => {
   font-family: var(--pixel-font-text);
   font-size: 15px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
   white-space: nowrap;
 }
 .offline-line {
@@ -403,7 +400,6 @@ const priceTag = computed(() => {
   font-family: var(--pixel-font-en);
   font-size: 20px;
   color: var(--pixel-text);
-  text-shadow: 2px 2px 0 var(--pixel-shadow);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -490,7 +486,6 @@ const priceTag = computed(() => {
 .stat .v {
   font-size: 17px;
   color: var(--pixel-text);
-  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .offline-msg {
   font-family: var(--pixel-font-en);
