@@ -410,30 +410,35 @@ const priceLine = computed(() => {
         <div v-else class="grid grid-2">
           <PixelChart
             :points="pointsOf('cpu')"
-            :y-label="`CPU %`"
+            y-label="CPU"
+            value-format="percent"
             color="var(--pixel-accent)"
             :y-max="100"
           />
           <PixelChart
             :points="pointsOf('memory')"
-            :y-label="`MEM %`"
+            y-label="MEM"
+            value-format="percent"
             color="var(--pixel-accent-2)"
             :y-max="100"
           />
           <PixelChart
             :points="pointsOf('disk')"
-            :y-label="`DISK %`"
+            y-label="DISK"
+            value-format="percent"
             color="var(--pixel-ok)"
             :y-max="100"
           />
           <PixelChart
             :points="pointsOf('net_in_speed')"
-            :y-label="`NET ↓ B/s`"
+            y-label="NET ↓"
+            value-format="bytes"
             color="var(--pixel-warn)"
           />
           <PixelChart
             :points="pointsOf('net_out_speed')"
-            :y-label="`NET ↑ B/s`"
+            y-label="NET ↑"
+            value-format="bytes"
             color="var(--pixel-danger)"
           />
         </div>
@@ -446,7 +451,8 @@ const priceLine = computed(() => {
             v-for="m in monitors"
             :key="m.monitor_id"
             :points="monitorPoints(m)"
-            :y-label="`${m.monitor_name} (ms)`"
+            :y-label="m.monitor_name"
+            value-format="ms"
             color="var(--pixel-accent)"
           />
         </div>
