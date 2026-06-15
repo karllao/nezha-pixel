@@ -62,6 +62,41 @@
   box-sizing: border-box;
 }
 
+/* ===== 鼠标光标 =====
+ * 所有可点击元素及其后代统一显示手型；disabled 状态显示 not-allowed */
+a,
+button,
+select,
+label,
+[role="button"],
+[role="tab"],
+.chip,
+.card,
+.tab,
+.divider,
+.brand,
+.brand-link {
+  cursor: pointer;
+}
+/* 让按钮 / 链接内部子元素继承光标，避免 hover 到子 span 上变回箭头 */
+a *,
+button *,
+select *,
+[role="button"] *,
+[role="tab"] *,
+.chip *,
+.card *,
+.tab *,
+.brand *,
+.brand-link * {
+  cursor: inherit;
+}
+:disabled,
+.disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
 html,
 body,
 #app {
