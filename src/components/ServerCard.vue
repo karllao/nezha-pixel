@@ -251,10 +251,15 @@ const priceTag = computed(() => {
   transition: transform 0.06s ease-out;
 }
 .card:hover {
-  transform: translate(-2px, -2px);
+  transform: translate(-3px, -3px);
+  border-color: var(--pixel-accent);
   box-shadow:
     0 0 0 2px var(--pixel-bg) inset,
-    6px 6px 0 0 var(--pixel-shadow);
+    7px 7px 0 0 var(--pixel-shadow);
+}
+.card:hover .name,
+.card:hover .c-name {
+  color: var(--pixel-accent);
 }
 .card.offline {
   opacity: 0.7;
@@ -277,8 +282,9 @@ const priceTag = computed(() => {
 }
 .c-name {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
-
+  font-size: 17px;
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -330,8 +336,10 @@ const priceTag = computed(() => {
 }
 .m .v {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
-  width: 28px;
+  font-size: 16px;
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
+  width: 30px;
   text-align: right;
 }
 .m :deep(.bar) {
@@ -340,7 +348,9 @@ const priceTag = computed(() => {
 }
 .speed {
   font-family: var(--pixel-font-text);
-  font-size: 14px;
+  font-size: 15px;
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
   white-space: nowrap;
 }
 .offline-line {
@@ -379,12 +389,21 @@ const priceTag = computed(() => {
 .dot {
   font-size: 16px;
   line-height: 1;
-  text-shadow: 0 0 6px currentColor;
+  text-shadow: 0 0 8px currentColor, 0 0 4px currentColor;
+}
+.dot.ok {
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
 }
 .name {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
-  
+  font-size: 20px;
+  color: var(--pixel-text);
+  text-shadow: 2px 2px 0 var(--pixel-shadow);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -464,12 +483,14 @@ const priceTag = computed(() => {
 }
 .stat .k {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
+  font-size: 12px;
   color: var(--pixel-text-dim);
-  
+  letter-spacing: 0.5px;
 }
 .stat .v {
+  font-size: 17px;
   color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .offline-msg {
   font-family: var(--pixel-font-en);

@@ -90,8 +90,9 @@ const statusClass = computed(() => (ws.connected ? "ok" : "danger"));
   align-items: center;
   gap: 8px;
   font-family: var(--pixel-font-text);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--pixel-text);
+  text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
 
 .logo {

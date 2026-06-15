@@ -190,8 +190,9 @@ const filtered = computed<NezhaServer[]>(() => {
   padding: 40px;
   text-align: center;
   font-family: var(--pixel-font-en);
-  font-size: 14px;
+  font-size: 18px;
   color: var(--pixel-accent);
+  text-shadow: 2px 2px 0 var(--pixel-shadow);
 }
 .blink {
   animation: blink 1s steps(2) infinite;

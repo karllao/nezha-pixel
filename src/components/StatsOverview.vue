@@ -86,19 +86,27 @@ const stats = computed(() => {
 }
 .label {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--pixel-text-dim);
-  
-  
+  letter-spacing: 0.5px;
 }
 .value {
   font-family: var(--pixel-font-en);
-  font-size: 22px;
+  font-size: 24px;
   color: var(--pixel-accent);
+  text-shadow: 2px 2px 0 var(--pixel-shadow);
+  line-height: 1.1;
 }
 .sub {
   font-family: var(--pixel-font-text);
-  font-size: 16px;
+  font-size: 15px;
+  color: var(--pixel-text-dim);
+}
+.sub .ok {
+  color: var(--pixel-ok);
+}
+.sub .danger {
+  color: var(--pixel-danger);
 }
 
 @media (max-width: 768px) {

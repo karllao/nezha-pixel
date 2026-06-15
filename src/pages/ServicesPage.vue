@@ -179,7 +179,17 @@ function getNum(v: number | Record<string, number>, key: string): number {
 
 <style scoped>
 .page-head h1 {
-  font-size: 16px;
+  font-size: 24px;
+  color: var(--pixel-text);
+  text-shadow: 2px 2px 0 var(--pixel-shadow);
+}
+.col > h2 {
+  font-size: 18px;
+  color: var(--pixel-text);
+  text-shadow: 2px 2px 0 var(--pixel-shadow);
+  border-left: 4px solid var(--pixel-accent);
+  padding: 4px 10px;
+  background: var(--pixel-bg-alt);
 }
 .loading,
 .empty {
@@ -209,8 +219,9 @@ function getNum(v: number | Record<string, number>, key: string): number {
 }
 .svc-head .name {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
-  
+  font-size: 18px;
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .svc-meta {
   display: grid;
@@ -220,16 +231,19 @@ function getNum(v: number | Record<string, number>, key: string): number {
 .svc-meta .stat {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 .svc-meta .k {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
+  font-size: 12px;
   color: var(--pixel-text-dim);
-  
+  letter-spacing: 0.5px;
 }
 .svc-meta .v {
   font-family: var(--pixel-font-text);
-  font-size: 16px;
+  font-size: 17px;
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .timeline {
   display: flex;
@@ -259,8 +273,9 @@ function getNum(v: number | Record<string, number>, key: string): number {
 }
 .cycle-head .name {
   font-family: var(--pixel-font-en);
-  font-size: 14px;
-  
+  font-size: 18px;
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .cycle-row {
   display: flex;

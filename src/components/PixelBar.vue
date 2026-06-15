@@ -62,9 +62,11 @@ const segs = computed(() => {
 }
 .bar-label {
   color: var(--pixel-text-dim);
+  letter-spacing: 0.5px;
 }
 .bar-value {
-  
+  color: var(--pixel-text);
+  text-shadow: 1px 1px 0 var(--pixel-shadow);
 }
 .bar-track {
   display: flex;
