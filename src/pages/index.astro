@@ -1,0 +1,29 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#7767e8" />
+    <meta name="description" content="Nezha friendly game-style monitoring console" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>Nezha Cloud Adventure</title>
+    <script is:inline>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("nezha-pocket-theme") || "light";
+        document.documentElement.lang = localStorage.getItem("nezha-pocket-locale") || (navigator.language.startsWith("zh") ? "zh-CN" : "en");
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="boot-screen" role="status"><span class="boot-caret">&gt;</span> BOOTING NEZHA_OS...</div>
+    </div>
+    <script>
+      import "../scripts/app";
+    </script>
+  </body>
+</html>
