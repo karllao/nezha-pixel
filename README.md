@@ -134,6 +134,45 @@ npm run build:user-dist
 
 Astro 输出单页应用。部署服务器必须把 `/server/*` 等未知路径回退到 `index.html`，仓库中的 `nginx.conf` 已包含该规则。API 和 WebSocket 仍需由外层反向代理转发给哪吒后端。
 
+### 打包内置主题发布文件
+
+```bash
+npm ci
+npm run build:release
+```
+
+命令会在项目根目录生成 `dist.zip` 并校验包结构。哪吒 V1 的内置主题下载脚本要求发布附件必须名为 `dist.zip`，且 ZIP 根目录中必须保留 `dist/`：
+
+```text
+dist.zip
+└── dist/
+    ├── index.html
+    ├── favicon.svg
+    ├── _astro/
+    └── assets/
+```
+
+不要进入 `dist/` 后只压缩其内容，否则哪吒官方的自动拉取脚本无法找到顶层 `dist` 目录。
+
+推送 `v*` 标签时，[Release 工作流](.github/workflows/release.yml)会自动构建，并把 `dist.zip` 附加到同名 GitHub Release：
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+要加入哪吒官方内置主题列表，还需向 `nezhahq/nezha` 提交 PR，在 `service/singleton/frontend-templates.yaml` 增加当前仓库、作者、版本和主题目录。例如：
+
+```yaml
+- path: "nezha-pixel-dist"
+  name: "Nezha-Pixel"
+  repository: "https://github.com/karllao/nezha-pixel"
+  author: "karllao"
+  version: "v1.0.0"
+```
+
+其中 `version` 必须与包含 `dist.zip` 的 Release 标签完全一致。
+
 ## API
 
 - `GET /api/v1/setting`
