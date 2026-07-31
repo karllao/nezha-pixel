@@ -26,8 +26,6 @@
     window.ForceShowServices= true
     window.ForceTheme= 'light'
     window.ForceCardInline= false
-    window.DisableAnimatedMan = true
-    window.FixedTopServerName = true
     window.ForceCardInline = true
 </script>
 ```
@@ -54,6 +52,7 @@ window.NezhaPocketConfig = {
 | 主页 | ![Light-full](screenshots/light-full.png) | ![Dark-full](screenshots/dark-full.png) |
 | 简约 | ![Light-simple](screenshots/light-simple.png) | ![Dark-simple](screenshots/dark-simple.png) |
 | 详情页 | ![Light-details](screenshots/light-details.png) | ![Dark-details](screenshots/dark-details.png) |
+| 世界地图 | ![Light-map](screenshots/light-map.png) | ![Dark-map](screenshots/dark-map.png) |
 
 ## Docker 部署
 
