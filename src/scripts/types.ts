@@ -13,3 +13,5 @@ export type MetricPeriod = "1d" | "7d" | "30d";
 export interface MetricDataPoint { ts: number; value: number }
 export interface ServerMetricsData { server_id: number; server_name: string; metric: string; data_points: MetricDataPoint[] }
 export interface ApiResponse<T> { success: boolean; data: T; error?: string }
+export interface NezhaSettingConfig { language: string; site_name: string; custom_code?: string; user_template?: string }
+export interface NezhaSetting { config: NezhaSettingConfig; version: string; tsdb_enabled?: boolean }

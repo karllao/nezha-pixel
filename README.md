@@ -13,6 +13,41 @@
 - 🛠 与官方 nezha-dash 完全相同的 API 路径与字段，可直接挂到现有 nezha 后端使用
 - 📱支持多端兼容，移动端/PC页面完美显示
 
+## 后台自定义设置
+
+主题会从官方 `GET /api/v1/setting` 接口读取站点名称、语言和“用户前端自定义代码”。官方主题变量中支持：`CustomLogo`、`CustomDesc`、`CustomBackgroundImage`、`CustomMobileBackgroundImage`、`CustomLinks`、`ForceTheme`、`ShowNetTransfer`、`ForceCardInline`、`ForceShowMap` 和 `ForceShowServices`。其中 `ForceTheme` 仅设置用户未主动选择主题时的默认显示。后台自定义代码中的样式与脚本也会按官方主题行为加载。
+
+```html
+<script>
+    window.CustomLogo = 'https://example.com/xxx.png'
+    window.CustomDesc = 'by Karl'
+    window.ShowNetTransfer = true
+    window.ForceShowMap= true
+    window.ForceShowServices= true
+    window.ForceTheme= 'light'
+    window.ForceCardInline= false
+    window.DisableAnimatedMan = true
+    window.FixedTopServerName = true
+    window.ForceCardInline = true
+</script>
+```
+
+还可以在“用户前端自定义代码”中加入主题专属设置：
+
+```html
+<script>
+window.NezhaPocketConfig = {
+  accentColor: "#7767e8",
+  showAdmin: true,
+  showMap: true,
+  showServices: true,
+  footerText: "My Status Page"
+};
+</script>
+```
+
+未填写的配置均沿用主题默认值。
+
 ## 截图
 | 场景 | 白日模式 | 黑夜模式 |
 |:---:|:---:|:---:|
