@@ -103,6 +103,16 @@ try {
   if (!entries.some((entry) => entry.name === "dist/index.html")) {
     throw new Error("发布包中缺少 dist/index.html。");
   }
+  const hiddenEmbedEntry = entries.find((entry) =>
+    entry.name
+      .split("/")
+      .some((segment) => segment.startsWith("_") || segment.startsWith(".")),
+  );
+  if (hiddenEmbedEntry) {
+    throw new Error(
+      `发布包包含无法被哪吒 Go Embed 递归嵌入的路径：${hiddenEmbedEntry.name}`,
+    );
+  }
   writeFileSync(archive, createZip(entries));
   console.log(`已生成 ${archive}（${entries.length} 个条目，顶层目录为 dist/）。`);
 } catch (error) {

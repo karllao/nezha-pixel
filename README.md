@@ -182,11 +182,11 @@ dist.zip
 └── dist/
     ├── index.html
     ├── favicon.svg
-    ├── _astro/
     └── assets/
 ```
 
 不要进入 `dist/` 后只压缩其内容，否则哪吒官方的自动拉取脚本无法找到顶层 `dist` 目录。
+静态资源必须放在 `assets/` 等普通目录中；Go Embed 会忽略名称以 `_` 或 `.` 开头的目录，因此不能使用 Astro 默认的 `_astro/`。
 
 推送 `v*` 标签时，[Release 工作流](.github/workflows/release.yml)会自动构建，并把 `dist.zip` 附加到同名 GitHub Release：
 

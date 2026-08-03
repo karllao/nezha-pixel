@@ -18,6 +18,12 @@ const secure = env.VITE_API_INSECURE !== "1";
 
 export default defineConfig({
   output: "static",
+  // Nezha embeds built-in themes with Go's //go:embed *-dist pattern.
+  // Go skips directories whose names start with "_" during recursive embeds,
+  // so Astro's default `_astro` directory would be missing at runtime.
+  build: {
+    assets: "assets",
+  },
   vite: {
     server: {
       proxy: {
