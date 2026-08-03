@@ -13,6 +13,14 @@
 - 🛠 与官方 nezha-dash 完全相同的 API 路径与字段，可直接挂到现有 nezha 后端使用
 - 📱支持多端兼容，移动端/PC页面完美显示
 
+## 截图
+| 场景 | 白日模式 | 黑夜模式 |
+|:---:|:---:|:---:|
+| 主页 | ![Light-full](screenshots/light-full.png) | ![Dark-full](screenshots/dark-full.png) |
+| 简约 | ![Light-simple](screenshots/light-simple.png) | ![Dark-simple](screenshots/dark-simple.png) |
+| 详情页 | ![Light-details](screenshots/light-details.png) | ![Dark-details](screenshots/dark-details.png) |
+| 世界地图 | ![Light-map](screenshots/light-map.png) | ![Dark-map](screenshots/dark-map.png) |
+
 ## 后台自定义设置
 
 主题会从官方 `GET /api/v1/setting` 接口读取站点名称、语言和“用户前端自定义代码”。官方主题变量中支持：`CustomLogo`、`CustomDesc`、`CustomBackgroundImage`、`CustomMobileBackgroundImage`、`CustomLinks`、`ForceTheme`、`ShowNetTransfer`、`ForceCardInline`、`ForceShowMap` 和 `ForceShowServices`。其中 `ForceTheme` 仅设置用户未主动选择主题时的默认显示。后台自定义代码中的样式与脚本也会按官方主题行为加载。
@@ -45,14 +53,6 @@ window.NezhaPocketConfig = {
 ```
 
 未填写的配置均沿用主题默认值。
-
-## 截图
-| 场景 | 白日模式 | 黑夜模式 |
-|:---:|:---:|:---:|
-| 主页 | ![Light-full](screenshots/light-full.png) | ![Dark-full](screenshots/dark-full.png) |
-| 简约 | ![Light-simple](screenshots/light-simple.png) | ![Dark-simple](screenshots/dark-simple.png) |
-| 详情页 | ![Light-details](screenshots/light-details.png) | ![Dark-details](screenshots/dark-details.png) |
-| 世界地图 | ![Light-map](screenshots/light-map.png) | ![Dark-map](screenshots/dark-map.png) |
 
 ## Docker 部署
 
@@ -187,25 +187,6 @@ dist.zip
 
 不要进入 `dist/` 后只压缩其内容，否则哪吒官方的自动拉取脚本无法找到顶层 `dist` 目录。
 静态资源必须放在 `assets/` 等普通目录中；Go Embed 会忽略名称以 `_` 或 `.` 开头的目录，因此不能使用 Astro 默认的 `_astro/`。
-
-推送 `v*` 标签时，[Release 工作流](.github/workflows/release.yml)会自动构建，并把 `dist.zip` 附加到同名 GitHub Release：
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
-要加入哪吒官方内置主题列表，还需向 `nezhahq/nezha` 提交 PR，在 `service/singleton/frontend-templates.yaml` 增加当前仓库、作者、版本和主题目录。例如：
-
-```yaml
-- path: "nezha-pixel-dist"
-  name: "Nezha-Pixel"
-  repository: "https://github.com/karllao/nezha-pixel"
-  author: "karllao"
-  version: "v1.0.0"
-```
-
-其中 `version` 必须与包含 `dist.zip` 的 Release 标签完全一致。
 
 ## API
 
